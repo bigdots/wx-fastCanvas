@@ -13,9 +13,9 @@
 
 ### 引入
 
-···js
-import fastCanvas from "\*/index";
-···
+```js
+import fastCanvas from '*/index'
+```
 
 ### 调用
 
@@ -30,9 +30,9 @@ const myCanvas = await new simpleCanvas().init({
 })
 ```
 
-2、绘制\_·myCanvas.draw(array)·
-
-功能还在完善中，目前只支持图片和文字这两种常用功能的绘制
+2、绘制
+api: `draw(Array)`
+Array: 传入一个即将绘制的对象数组，fastCanvas 会按照顺序进行绘制
 
 ```js
 myCanvas.draw([
@@ -51,7 +51,10 @@ myCanvas.draw([
     font: "normal normal bold 36px arial,sans-serif", //非必须，规则参考css font属性
     textAlign: "center", // 对其方式，对其基线以x坐标为准，非必须
 }]
+
 ```
+
+** 功能还在完善中，目前只支持图片和文字这两种常用功能的绘制 **
 
 3、其他功能
 
