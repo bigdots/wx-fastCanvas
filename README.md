@@ -32,6 +32,8 @@ const myCanvas = await new simpleCanvas().init({
 
 2、绘制\_·myCanvas.draw(array)·
 
+功能还在完善中，目前只支持图片和文字这两种常用功能的绘制
+
 ```js
 myCanvas.draw([
   {
