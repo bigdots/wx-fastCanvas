@@ -1,6 +1,6 @@
 {
-  "name": "fastcanvas",
-  "version": "1.0.0",
+  "name": "wx-fastcanvas",
+  "version": "1.0.4",
   "description": "",
   "main": "index.js",
   "scripts": {
