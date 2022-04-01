@@ -12,6 +12,12 @@
 
 2、 npm 安装
 
+```bash
+npm i wx-fastcanvas
+```
+
+下载完成后，利用微信开发者工具进行构建 npm
+
 ### 引入
 
 ```js
@@ -21,8 +27,9 @@ import Fastcanvas from 'wx-fastcanvas'
 ### 调用
 
 1、初始化
-该库中所有的 api 传入的尺寸均为您设计稿上的尺寸，
-所以需要您在初始化的时候传入设计稿上的屏幕宽度用于动态计算 canvas 及其元素的尺寸；
+
+该库中所有的 api 传入的尺寸均为您**设计稿上的尺寸**，
+所以需要您在初始化的时候传入设计稿上的屏幕宽度以便于动态计算 canvas 及其元素的尺寸，达到自适应的效果；
 
 ```html
 <!-- wxml  -->
@@ -40,8 +47,10 @@ const myCanvas = await new Fastcanvas().init({
 ```
 
 2、绘制
-api: `draw(Array)`
-Array: 传入一个即将绘制的对象数组，fastCanvas 会按照顺序进行绘制
+
+- api: `draw(Array)`
+
+- Array: 传入一个即将绘制的对象数组，fastCanvas 会按照顺序进行绘制
 
 ```js
 myCanvas.draw([
@@ -63,7 +72,7 @@ myCanvas.draw([
 
 ```
 
-** 功能还在完善中，目前只支持图片和文字这两种常用功能的绘制 **
+**功能还在完善中，目前只支持图片和文字这两种常用功能的绘制**
 
 3、其他功能
 
