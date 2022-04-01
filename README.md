@@ -56,7 +56,7 @@ const myCanvas = await new Fastcanvas().init({
 myCanvas.draw([
   {
     type: "img", //绘制类型，必须
-    src: "../../images/codeBg.png",  //图片地址，type为img时，必须
+    src: "../../images/codeBg.png",  //必须,图片地址，type为img时，支持本地图片、远程图片、临时图片地址
     x: 0, //绘制对象左上角的x坐标，必须
     y: 0, //绘制对象左上角的y坐标，必须
     width: 706, // 绘制对象的宽度，必须
