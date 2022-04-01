@@ -8,14 +8,14 @@
 
 ### 安装
 
-1、 直接下载拷贝到你的项目目录
+1、 直接下载拷贝到你的项目目录。
 
 2、 npm 安装
 
 ### 引入
 
 ```js
-import fastCanvas from 'fastCanvas'
+import Fastcanvas from 'wx-fastcanvas'
 ```
 
 ### 调用
@@ -24,8 +24,14 @@ import fastCanvas from 'fastCanvas'
 该库中所有的 api 传入的尺寸均为您设计稿上的尺寸，
 所以需要您在初始化的时候传入设计稿上的屏幕宽度用于动态计算 canvas 及其元素的尺寸；
 
+```html
+<!-- wxml  -->
+<canvas type="2d" id="myCanvas"></canvas>
+```
+
 ```js
-const myCanvas = await new simpleCanvas().init({
+//js
+const myCanvas = await new Fastcanvas().init({
   id: '#myCanvas',
   UIwidth: '750', // 设计稿的宽度，比如750
   width: '706', // canvas的宽度
