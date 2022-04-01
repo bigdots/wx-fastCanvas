@@ -14,15 +14,21 @@
 
 ### 引入
 
-···js
-import fastCanvas from "\*/index";
-···
+```js
+import fastCanvas from "projectName/index";
+```
 
 ### 调用
 
 1、初始化
 
+```html
+//wxml
+<canvas type="2d" id="myCanvas"></canvas>
+```
+
 ```js
+//js
 const myCanvas = await new simpleCanvas().init({
   id: '#myCanvas',
   UIwidth: '750', // 设计稿的宽度，比如750，方便计算
