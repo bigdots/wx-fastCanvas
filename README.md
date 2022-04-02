@@ -97,7 +97,7 @@ myCanvas.draw([
       x: 350, //绘制对象左上角的x坐标，非必须，默认为0
       y: 370, //绘制对象左上角的y坐标，非必须，默认为0
       font: "normal normal bold 36px arial,sans-serif", //非必须，规则参考css font属性
-      textAlign: "center", // 非必须，对齐方式，注意：对齐基线以（x，y)所在的直线坐标为准，具体可参考canvas文档
+      textAlign: "center", // 非必须，对齐方式，注意：对齐基线以（x，y)坐标为准，具体可参考canvas文档
     }
   ```
 
@@ -106,7 +106,7 @@ myCanvas.draw([
   ```js
     {
       type: "qrcode", //必须, 绘制类型
-      content: '', //必须, 转化为二维码的内容
+      content: 'https://github.com/bigdots/wx-fastCanvas', //必须, 转化为二维码的内容
       x: 253, //绘制对象左上角的x坐标，非必须，默认为0
       y: 400, //绘制对象左上角的x坐标，非必须，默认为0
       width: 200, //绘制对象左上角的x坐标，非必须，默认为250
