@@ -1,11 +1,16 @@
 {
   "name": "wx-fastcanvas",
-  "version": "1.0.5",
+  "version": "1.1.3",
   "description": "",
-  "main": "index.js",
+  "main": "./src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bigdots/wx-fastCanvas"
+  },
+  "keywords": ["wechat","canvas","canvas-2d","miniprogram"],
   "author": "sean",
-  "license": "ISC"
+  "license": "MIT"
 }
