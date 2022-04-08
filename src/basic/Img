@@ -1,0 +1,25 @@
+export default class Img {
+  ctx = {}
+  canvas = {}
+  constructor(ctx,canvas){
+    this.ctx = ctx
+    this.canvas = canvas
+  }
+  private imageLoad(url) {
+    return new Promise((resolve, reject) => {
+      const img = this.canvas.createImage()
+      img.src = url
+      img.onload = () => {
+        resolve(img)
+      }
+      img.onerror = () => {
+        reject('图片加载失败')
+      }
+    })
+  }
+  async draw(ele,x, y, width, height){
+    // console.log(ele.src)
+    const img = await this.imageLoad(ele.src)
+    this.ctx.drawImage(img, x, y, width, height)
+  }
+}

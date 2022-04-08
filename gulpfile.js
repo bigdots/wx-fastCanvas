@@ -5,9 +5,14 @@ const rename = require('gulp-rename')
 
 exports.default = function () {
   return (
-    src('src/*.js')
+    src('src/*.ts')
       // .pipe(babel())
       // .pipe(src('vendor/*.js'))
+      // .pipe(
+      //   ts({
+      //     declaration: true,
+      //   })
+      // )
       .pipe(uglify())
       .pipe(rename({ extname: '.min.js' }))
       .pipe(dest('dist/'))

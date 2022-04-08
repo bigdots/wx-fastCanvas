@@ -1,0 +1,24 @@
+export default class Txt {
+  ctx = {}
+  canvas = {}
+  constructor(ctx, canvas) {
+    this.ctx = ctx
+    this.canvas = canvas
+  }
+  draw(ele) {
+    // this.ctx.font = `normal normal bold 30px arial,sans-serif`;
+    if (ele.font) {
+      this.ctx.font = ele.font.replace(/(\d)+/g, (macth) => {
+        return macth * this.ratio
+      })
+    }
+    if (ele.textAlign) {
+      this.ctx.textAlign = ele.textAlign
+    }
+    if (ele.fillStyle) {
+      this.ctx.fillStyle = ele.fillStyle
+    }
+
+    this.ctx.fillText(ele.content, x, y)
+  }
+}
