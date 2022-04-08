@@ -10,7 +10,7 @@ class FastCanvas {
   constructor() {
     
   }
-  static async init(obj) {
+  static async init(obj:object) {
     // console.log(obj)
     const instance = new FastCanvas()
     //dpr设备像素比，物理像素与css像素的比值
