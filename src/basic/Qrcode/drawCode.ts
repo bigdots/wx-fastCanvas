@@ -1,5 +1,4 @@
-// import extend from 'extend'
-import { QRCode, QRErrorCorrectLevel } from '../../qrcode'
+import { QRCode, QRErrorCorrectLevel } from './Qrcode'
 
 function utf16to8(str: any) {
   var out, i, len, c

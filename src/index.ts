@@ -2,6 +2,7 @@ import Img from './basic/Img'
 import Txt from './basic/Txt'
 import { CanvasParam } from './utils/Interface'
 import { Type } from './utils/enums'
+import Qrcode from './basic/Qrcode/index'
 
 class FastCanvas {
   ctx: any
@@ -120,6 +121,7 @@ class FastCanvas {
       }
 
       if (ele.type == Type.Qrcode) {
+        new Qrcode().draw(ele)
       }
     }
 
