@@ -32,16 +32,10 @@ class FastCanvas {
   }
   calcSize(ele: any) {
     Object.keys(ele).forEach((key) => {
-      // console.log(key, ele[key]);
       if (typeof ele[key] === 'number') {
         ele[key] = ele[key] * this.ratio
       }
     })
-    // // 默认值
-    // const x = ele.x ? ele.x : 0
-    // const y = ele.y ? ele.y : 0
-    // const width = ele.width ? ele.width : 250
-    // const height = ele.height ? ele.height : 250
     return ele
   }
 
@@ -134,9 +128,3 @@ class FastCanvas {
 }
 
 export default FastCanvas
-
-// import { sayHello } from "./basic/greeter";
-
-// import { sayHello } from "./basic/Txt";
-
-// console.log(sayHello("TypeScript"));

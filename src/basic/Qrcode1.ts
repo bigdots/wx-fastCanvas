@@ -2,7 +2,7 @@ import drawQrcode from './drawCode'
 import FastCanvas from '../index'
 
 class Qrcode extends FastCanvas {
-  draw(ele) {
+  draw(ele: any) {
     // 默认值
     const x = ele.x ? ele.x : 0
     const y = ele.y ? ele.y : 0

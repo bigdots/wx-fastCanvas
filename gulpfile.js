@@ -7,14 +7,6 @@ const tsProject = ts.createProject('tsconfig.json')
 
 exports.default = function () {
   return (
-    // src('src/*.ts')
-    // .pipe(babel())
-    // .pipe(src('vendor/*.js'))
-    // .pipe(
-    //   ts({
-    //     declaration: true,
-    //   })
-    // )
     tsProject
       .src()
       .pipe(tsProject())

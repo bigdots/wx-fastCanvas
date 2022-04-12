@@ -1,7 +1,6 @@
 // import extend from 'extend'
-import { QRCode, QRErrorCorrectLevel } from './qrcode'
+import { QRCode, QRErrorCorrectLevel } from '../../qrcode'
 
-// support Chinese
 function utf16to8(str: any) {
   var out, i, len, c
   out = ''
@@ -45,23 +44,6 @@ function drawQrcode(options: any) {
     },
     options
   )
-  // options = extend(true, {
-  //   width: 256,
-  //   height: 256,
-  //   x: 0,
-  //   y: 0,
-  //   typeNumber: -1,
-  //   correctLevel: QRErrorCorrectLevel.H,
-  //   background: '#ffffff',
-  //   foreground: '#000000',
-  //   image: {
-  //     imageResource: '',
-  //     dx: 0,
-  //     dy: 0,
-  //     dWidth: 100,
-  //     dHeight: 100
-  //   }
-  // }, options)
 
   if (!options.canvasId && !options.ctx) {
     console.warn('please set canvasId or ctx!')
@@ -103,10 +85,6 @@ function drawQrcode(options: any) {
         )
       }
     }
-
-    // if (options.image.imageResource) {
-    //   ctx.drawImage(options.image.imageResource, options.image.dx, options.image.dy, options.image.dWidth, options.image.dHeight)
-    // }
   }
 }
 
