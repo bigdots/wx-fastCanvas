@@ -4,6 +4,8 @@
     "noImplicitAny": true,
     "target": "es2015",
     "allowJs": true,
+    "removeComments": true,
+    "sourceMap": true,
     "types": ["miniprogram-api-typings"],
     "lib": [
       "es2015"
