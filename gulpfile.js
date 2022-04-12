@@ -18,8 +18,8 @@ exports.default = function () {
     tsProject
       .src()
       .pipe(tsProject())
-      .js.pipe(uglify())
-      .pipe(rename({ extname: '.min.js' }))
-      .pipe(dest('dist'))
+      // .pipe(uglify())
+      // .pipe(rename({ extname: '.min.js' }))
+      .js.pipe(dest('dist'))
   )
 }

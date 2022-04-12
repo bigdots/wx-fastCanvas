@@ -2,7 +2,7 @@
 import { QRCode, QRErrorCorrectLevel } from './qrcode'
 
 // support Chinese
-function utf16to8(str) {
+function utf16to8(str: any) {
   var out, i, len, c
   out = ''
   len = str.length
@@ -22,7 +22,7 @@ function utf16to8(str) {
   return out
 }
 
-function drawQrcode(options) {
+function drawQrcode(options: any) {
   options = options || {}
   options = Object.assign(
     {},

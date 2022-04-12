@@ -1,16 +1,15 @@
-import drawQrcode from './drawCode'
-import Img from "./basic/Img"
-import Txt from "./basic/Txt"
+import Img from './basic/Img'
+import Txt from './basic/Txt'
+import { CanvasParam } from './utils/Interface'
+import { Type } from './utils/enums'
 
 class FastCanvas {
-  ctx:object = {}
-  ratio:number = 0
-  canvas:object = {}
-  tempFilePath:string = ''
-  constructor() {
-    
-  }
-  static async init(obj:object) {
+  ctx: any
+  ratio: number
+  canvas: any
+  tempFilePath: string
+  constructor() {}
+  static async init(obj: CanvasParam) {
     // console.log(obj)
     const instance = new FastCanvas()
     //dpr设备像素比，物理像素与css像素的比值
@@ -18,32 +17,44 @@ class FastCanvas {
     // 屏幕与设计稿的比值
     const ScreenUiratio = screenWidth / obj.UIwidth
     instance.ratio = ScreenUiratio * dpr
-    const nodes = await instance.getCanvasNode(obj.id)
+    // 设置canvas的信息并挂载到实例上
+    const nodes: any = await instance.getCanvasNode(obj.id)
     instance.canvas = nodes[0].node
     instance.canvas.width = obj.width * instance.ratio
     instance.canvas.height = obj.height * instance.ratio
-    instance.ctx = this.canvas.getContext('2d')
+    instance.ctx = instance.canvas.getContext('2d')
     return instance
   }
 
   async downLoad() {
-    this.saveCanvasToPhotosAlbum(this.canvas)
+    this.saveCanvasToPhotosAlbum()
     return this
+  }
+  calcSize(ele: any) {
+    Object.keys(ele).forEach((key) => {
+      // console.log(key, ele[key]);
+      if (typeof ele[key] === 'number') {
+        ele[key] = ele[key] * this.ratio
+      }
+    })
+    // // 默认值
+    // const x = ele.x ? ele.x : 0
+    // const y = ele.y ? ele.y : 0
+    // const width = ele.width ? ele.width : 250
+    // const height = ele.height ? ele.height : 250
+    return ele
   }
 
   async getTempFilePath() {
     // 下载到本地临时文件
-    const res = await wx.canvasToTempFilePath(
-      {
-        canvas: this.canvas,
-      },
-      this
-    )
+    const res = await wx.canvasToTempFilePath({
+      canvas: this.canvas,
+    })
     this.tempFilePath = res.tempFilePath
     return this
   }
 
-  async saveCanvasToPhotosAlbum(canvas) {
+  async saveCanvasToPhotosAlbum() {
     try {
       // 处理授权
       const setting = await wx.getSetting()
@@ -55,12 +66,9 @@ class FastCanvas {
         title: '下载中',
       })
       // 下载到本地临时文件
-      const downRes = await wx.canvasToTempFilePath(
-        {
-          canvas,
-        },
-        this
-      )
+      const downRes = await wx.canvasToTempFilePath({
+        canvas: this.canvas,
+      })
 
       // 写入相册
       await wx.saveImageToPhotosAlbum({
@@ -78,10 +86,8 @@ class FastCanvas {
     return this
   }
 
-  
-
-  private getCanvasNode(selector) {
-    return new Promise((resolve, reject) => {
+  private getCanvasNode(selector: string) {
+    return new Promise((resolve: Function, reject: Function) => {
       const query = wx.createSelectorQuery()
       query.select(selector).fields({ node: true, size: true })
       query.exec((res) => {
@@ -90,32 +96,18 @@ class FastCanvas {
     })
   }
 
-  async draw(arr) {
-    //   const {} = this;
-    // console.log(this)
+  async paint(arr: any[]) {
     for (let i = 0; i < arr.length; i++) {
-      const ele = arr[i]
       // 遍历所有的数值，进行设备适配
-      Object.keys(ele).forEach((key) => {
-        // console.log(key, ele[key]);
-        if (typeof ele[key] === 'number') {
-          ele[key] = ele[key] * this.ratio
-        }
-      })
+      const ele = this.calcSize(arr[i])
 
-      // 默认值
-      const x = ele.x ? ele.x : 0
-      const y = ele.y ? ele.y : 0
-      const width = ele.width ? ele.width : 250
-      const height = ele.height ? ele.height : 250
-
-      if (ele.type == 'img') {
+      if (ele.type == Type.Img) {
         // console.log(ele.src)
         // const img = await this.imageLoad(ele.src)
         // this.ctx.drawImage(img, x, y, width, height)
-        new Img(this.ctx,this.canvas).draw(ele,x, y, width, height)
+        new Img().draw(ele)
       }
-      if (ele.type == 'text') {
+      if (ele.type == Type.Txt) {
         // this.ctx.font = `normal normal bold 30px arial,sans-serif`;
         // if (ele.font) {
         //   this.ctx.font = ele.font.replace(/(\d)+/g, (macth) => {
@@ -130,18 +122,10 @@ class FastCanvas {
         // }
 
         // this.ctx.fillText(ele.content, x, y)
-        new Txt(this.ctx,this.canvas).draw(ele)
+        new Txt().draw(ele)
       }
 
-      if (ele.type == 'qrcode') {
-        drawQrcode({
-          ctx: this.ctx,
-          x,
-          y,
-          width,
-          height,
-          text: ele.content,
-        })
+      if (ele.type == Type.Qrcode) {
       }
     }
 
@@ -150,3 +134,9 @@ class FastCanvas {
 }
 
 export default FastCanvas
+
+// import { sayHello } from "./basic/greeter";
+
+// import { sayHello } from "./basic/Txt";
+
+// console.log(sayHello("TypeScript"));

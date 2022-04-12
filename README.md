@@ -33,16 +33,16 @@ import Fastcanvas from 'wx-fastcanvas'
 
 ```html
 <!-- wxml  -->
-<canvas type="2d" id="myCanvas"></canvas>
+<canvas type="2d" id="myCanvas" style="width:706;height:946"></canvas>
 ```
 
 ```js
 //js
 const myCanvas = await new Fastcanvas().init({
   id: '#myCanvas', //必须，<canvas>标签的id
-  UIwidth: '750', // 必须，设计稿的宽度，比如750
-  width: '706', // 必须，canvas的宽度
-  height: '946', // 必须，canvas的高度
+  UIwidth: 750, // 必须，设计稿的宽度，比如750
+  width: 706, // 必须，canvas的宽度
+  height: 946, // 必须，canvas的高度
 })
 ```
 
@@ -59,14 +59,14 @@ example：
 ```js
 myCanvas.draw([
   {
-    type: "img",
+    type: "Img",
     src: "../../images/codeBg.png",
     x: 0,
     y: 0,
     width: 706,
     height: 946,
 },{
-    type: "text",
+    type: "Txt",
     content: '这里是要输入的文字',
     x: 350,
     y: 370,
@@ -79,7 +79,7 @@ myCanvas.draw([
 
   ```js
       {
-        type: "img", //必须, 绘制类型
+        type: "Img", //必须, 绘制类型
         src: "../../images/codeBg.png",  //必须,图片地址，支持本地图片、远程图片、临时图片地址
         x: 0, //绘制对象左上角的x坐标，非必须，默认为0
         y: 0, //绘制对象左上角的y坐标，非必须，默认为0
@@ -92,7 +92,7 @@ myCanvas.draw([
 
   ```js
     {
-      type: "text", //绘制类型，必须
+      type: "Txt", //绘制类型，必须
       content: '这里是要输入的文字', // 必须，绘制内容
       x: 350, //绘制对象左上角的x坐标，非必须，默认为0
       y: 370, //绘制对象左上角的y坐标，非必须，默认为0
@@ -105,7 +105,7 @@ myCanvas.draw([
 
   ```js
     {
-      type: "qrcode", //必须, 绘制类型
+      type: "Qrcode", //必须, 绘制类型
       content: 'https://github.com/bigdots/wx-fastCanvas', //必须, 转化为二维码的内容
       x: 253, //绘制对象左上角的x坐标，非必须，默认为0
       y: 400, //绘制对象左上角的x坐标，非必须，默认为0
