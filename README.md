@@ -13,7 +13,7 @@
 2、 npm 安装
 
 ```bash
-npm i wx-fastcanvas
+npm i wx-fastcanvas --save
 ```
 
 _注意：下载完成后，记得利用微信开发者工具进行构建 npm_
