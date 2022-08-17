@@ -33,7 +33,7 @@ import Fastcanvas from 'wx-fastcanvas'
 
 ```html
 <!-- wxml  -->
-<canvas type="2d" id="myCanvas"></canvas>
+<canvas type="2d" id="myCanvas" style="width: 706rpx; height:946rpx"></canvas>
 ```
 
 ```js
