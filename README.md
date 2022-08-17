@@ -133,6 +133,6 @@ await myCanvas.getTempFilePath()
 myCanvas.downLoad()
 ```
 
-## Tips
+## 注意
 
-二维码的绘制功能参考了[weapp-qrcode](https://github.com/yingye/weapp-qrcode)
+由于精力有限，此项目未做大量版本测试，本人使用的微信小程序基本库为2.19.6
