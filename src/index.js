@@ -148,17 +148,6 @@ class FastCanvas {
         const dataUrl = await QRCode.toDataURL(canvas, ele.content)
         const img = await this.imageLoad(dataUrl)
         this.ctx.drawImage(img, x, y, width, height)
-
-        console.debug('11112222')
-
-        // drawQrcode({
-        //   ctx: this.ctx,
-        //   x,
-        //   y,
-        //   width,
-        //   height,
-        //   text: ele.content,
-        // })
       }
     }
 
