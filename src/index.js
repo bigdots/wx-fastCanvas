@@ -98,10 +98,9 @@ class FastCanvas {
   }
 
   async draw(arr) {
-    //   const {} = this;
-    // console.log(this)
     for (let i = 0; i < arr.length; i++) {
       const ele = arr[i]
+      console.debug('1234', ele)
       // 遍历所有的数值，进行设备适配
       Object.keys(ele).forEach((key) => {
         // console.log(key, ele[key]);
@@ -111,47 +110,113 @@ class FastCanvas {
       })
 
       // 默认值
-      const x = ele.x ? ele.x : 0
-      const y = ele.y ? ele.y : 0
-      const width = ele.width ? ele.width : 250
-      const height = ele.height ? ele.height : 250
+      ele.x = ele.x ? ele.x : 0
+      ele.y = ele.y ? ele.y : 0
+      ele.width = ele.width ? ele.width : 250
+      ele.height = ele.height ? ele.height : 250
 
-      if (ele.type == 'img') {
-        // console.log(ele.src)
-        const img = await this.imageLoad(ele.src)
-        this.ctx.drawImage(img, x, y, width, height)
-      }
-      if (ele.type == 'text') {
-        // this.ctx.font = `normal normal bold 30px arial,sans-serif`;
-        if (ele.font) {
-          this.ctx.font = ele.font.replace(/(\d)+/g, (macth) => {
-            return macth * this.ratio
-          })
-        }
-        if (ele.textAlign) {
-          this.ctx.textAlign = ele.textAlign
-        }
-        if (ele.fillStyle) {
-          this.ctx.fillStyle = ele.fillStyle
-        }
-
-        this.ctx.fillText(ele.content, x, y)
-      }
-
-      if (ele.type == 'qrcode') {
-        // 创建离屏 2D canvas 实例
-        const canvas = wx.createOffscreenCanvas({
-          type: '2d',
-          width,
-          height,
-        })
-        const dataUrl = await QRCode.toDataURL(canvas, ele.content)
-        const img = await this.imageLoad(dataUrl)
-        this.ctx.drawImage(img, x, y, width, height)
+      switch (ele.type) {
+        case 'img':
+          await this.drawImg(ele)
+          break
+        case 'text':
+          this.drawText(ele)
+          break
+        case 'qrcode':
+          await this.drawQrcode(ele)
+          break
+        default:
+          break
       }
     }
 
     return this
+  }
+
+  async drawQrcode(ele) {
+    const { x, y, width, height, content } = ele
+    // 创建离屏 2D canvas 实例
+    const canvas = wx.createOffscreenCanvas({
+      type: '2d',
+      width,
+      height,
+    })
+    const dataUrl = await QRCode.toDataURL(canvas, content)
+    const img = await this.imageLoad(dataUrl)
+    this.ctx.drawImage(img, x, y, width, height)
+  }
+
+  drawText(ele) {
+    const { x, y, font, textAlign, fillStyle, content } = ele
+    // this.ctx.font = `normal normal bold 30px arial,sans-serif`;
+    if (font) {
+      this.ctx.font = font.replace(/(\d)+/g, (macth) => {
+        return macth * this.ratio
+      })
+    }
+    if (textAlign) {
+      this.ctx.textAlign = textAlign
+    }
+    if (fillStyle) {
+      this.ctx.fillStyle = fillStyle
+    }
+
+    this.ctx.fillText(content, x, y)
+  }
+
+  async drawImg(ele) {
+    const { x, y, width, height, src, radius } = ele
+    let url
+    if (radius) {
+      url = await this.createRadiusImg(ele)
+    } else {
+      url = src
+    }
+
+    const img = await this.imageLoad(url)
+    this.ctx.drawImage(img, x, y, width, height)
+  }
+
+  async createRadiusImg(ele) {
+    const { x, y, width, height, radius, src } = ele
+    // 创建离屏 2D canvas 实例
+    const canvas = wx.createOffscreenCanvas({
+      type: '2d',
+      width,
+      height,
+    })
+
+    // 绘制圆角矩形
+    const ctx = canvas.getContext('2d')
+    ctx.beginPath()
+    ctx.arc(width - radius, height - radius, radius, 0, Math.PI / 2)
+    ctx.lineTo(radius, height)
+    ctx.arc(radius, height - radius, radius, Math.PI / 2, Math.PI)
+    ctx.lineTo(0, radius)
+    ctx.arc(radius, radius, radius, Math.PI, (Math.PI * 3) / 2)
+    ctx.lineTo(width - radius, 0)
+    ctx.arc(width - radius, radius, radius, (Math.PI * 3) / 2, Math.PI * 2)
+    ctx.closePath()
+
+    const img = await this.imageLoad(src)
+
+    // 画布裁切
+    ctx.clip()
+    // 绘画图片
+    ctx.drawImage(
+      img,
+      0,
+      0,
+      img.naturalWidth,
+      img.naturalHeight,
+      0,
+      0,
+      width,
+      height
+    )
+    // 绘制图片到画布上
+    const dataUrl = await canvas.toDataURL('image/png')
+    return dataUrl
   }
 }
 

@@ -88,6 +88,20 @@ myCanvas.draw([
       }
   ```
 
+- 绘制圆角图片
+
+ ```js
+      {
+        type: "img", 
+        src: "../../images/codeBg.png",  
+        x: 0, 
+        y: 0, 
+        width: 706, 
+        height: 946, 
+        radius: 10, // 增加圆角参数即可
+      }
+  ```
+
 - 绘制文字
 
   ```js
