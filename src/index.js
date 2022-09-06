@@ -198,25 +198,21 @@ class FastCanvas {
     ctx.arc(width - radius, radius, radius, (Math.PI * 3) / 2, Math.PI * 2)
     ctx.closePath()
 
-    const img = await this.imageLoad(src)
-
     // 画布裁切
     ctx.clip()
+
     // 绘画图片
-    ctx.drawImage(
-      img,
-      0,
-      0,
-      img.naturalWidth,
-      img.naturalHeight,
-      0,
-      0,
-      width,
-      height
-    )
-    // 绘制图片到画布上
-    const dataUrl = await canvas.toDataURL('image/png')
-    return dataUrl
+    const img = await this.imageLoad(src)
+    ctx.drawImage(img, 0, 0, width, height)
+
+    // 获取临时地址
+    const res = await wx.canvasToTempFilePath({
+      canvas: canvas,
+    })
+
+    console.debug('res', res.tempFilePath)
+
+    return res.tempFilePath
   }
 }
 
