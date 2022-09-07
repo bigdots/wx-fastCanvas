@@ -100,7 +100,7 @@ class FastCanvas {
   async draw(arr) {
     for (let i = 0; i < arr.length; i++) {
       const ele = arr[i]
-      console.debug('1234', ele)
+      // console.debug('1234', ele)
       // 遍历所有的数值，进行设备适配
       Object.keys(ele).forEach((key) => {
         // console.log(key, ele[key]);
@@ -206,13 +206,14 @@ class FastCanvas {
     ctx.drawImage(img, 0, 0, width, height)
 
     // 获取临时地址
-    const res = await wx.canvasToTempFilePath({
-      canvas: canvas,
-    })
+    // const res = await wx.canvasToTempFilePath({
+    //   canvas: canvas,
+    // })
+    // return res.tempFilePath
 
-    console.debug('res', res.tempFilePath)
-
-    return res.tempFilePath
+    // 图片转base64
+    const base64 = canvas.toDataURL()
+    return base64
   }
 }
 
